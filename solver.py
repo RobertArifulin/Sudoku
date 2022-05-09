@@ -1,6 +1,33 @@
 from time import time
 
 
+def check_field(field: list[list]) -> bool:
+    columns = [[0] * 9 for _ in range(9)]
+    for i in range(9):
+        for j in range(9):
+            columns[i][j] = field[j][i]
+    blocks = [[] for _ in range(9)]
+    for i in range(9):
+        for j in range(9):
+            blocks[3 * (i // 3) + j // 3].append(field[i][j])
+
+    for i in range(9):
+        if len(set(columns[i])) - min(1, columns[i].count(0)) != 9 - columns[i].count(0):
+            return False
+        if len(set(field[i])) - min(1, field[i].count(0)) != 9 - field[i].count(0):
+            return False
+        if len(set(blocks[i])) - min(1, blocks[i].count(0)) != 9 - blocks[i].count(0):
+            return False
+
+    for i in range(9):
+        for j in range(9):
+            if not field[i][j]:
+                option = get_options(j, i, field)
+                if not option:
+                    return False
+    return True
+
+
 def deep_copy(field: list[list]) -> list[list]:  # производит глубокое копирование поля
     # эта функция в данном случае гораздо быстрее, чем deepcopy из модуля copy
     return [field[i].copy() for i in range(9)]
@@ -66,16 +93,20 @@ def solve(field: list[list]) -> tuple[list, bool]:  # решает рекурс�
     return field, False
 
 
-'''
-пример ввода:
+field1 = [[3, 2, 0, 4, 5, 0, 0, 0, 0], [5, 8, 9, 7, 6, 0, 2, 4, 0], [6, 1, 0, 8, 2, 9, 5, 3, 0],
+          [4, 0, 1, 9, 3, 8, 0, 2, 0], [8, 7, 5, 6, 0, 0, 3, 9, 4], [9, 0, 0, 5, 4, 7, 6, 0, 8],
+          [0, 9, 6, 0, 8, 5, 4, 7, 2], [0, 5, 8, 2, 0, 4, 1, 0, 3], [0, 4, 3, 0, 7, 6, 0, 5, 9]]
 
-020070000
-400000000
-008004903
-000108000
-000400280
-000050091
-071020050
-000300007
-090000300
-'''
+field2 = [[3, 0, 7, 4, 0, 1, 0, 0, 0], [5, 8, 0, 0, 6, 0, 2, 0, 0], [0, 0, 0, 0, 2, 0, 5, 3, 7],
+          [0, 0, 0, 0, 3, 0, 0, 2, 5], [0, 7, 0, 0, 0, 0, 0, 0, 4], [9, 0, 0, 5, 0, 7, 0, 1, 0],
+          [0, 0, 0, 3, 0, 5, 0, 7, 0], [0, 0, 8, 0, 9, 4, 0, 0, 3], [2, 4, 0, 0, 0, 0, 8, 0, 0]]
+
+field3 = [[0, 0, 0, 8, 0, 1, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 4, 3], [5, 0, 0, 0, 0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 7, 0, 8, 0, 0], [0, 0, 0, 0, 0, 0, 1, 0, 0], [0, 2, 0, 0, 3, 0, 0, 0, 0],
+          [6, 0, 0, 0, 0, 0, 0, 7, 5], [0, 0, 3, 4, 0, 0, 0, 0, 0], [0, 0, 0, 2, 0, 0, 6, 0, 0]]
+
+field4 = [[1, 2, 3, 4, 5, 6, 7, 8, 0], [1, 2, 3, 4, 5, 6, 7, 8, 9], [5, 0, 0, 0, 0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 7, 0, 8, 0, 0], [0, 0, 0, 0, 0, 0, 1, 0, 0], [0, 2, 0, 0, 3, 0, 0, 0, 0],
+          [6, 0, 0, 0, 0, 0, 0, 7, 5], [0, 0, 3, 4, 0, 0, 0, 0, 0], [0, 0, 0, 2, 0, 0, 6, 0, 0]]
+
+fields = [field1, field2, field3, field4]

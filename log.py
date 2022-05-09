@@ -28,3 +28,39 @@ def save_logs(field, solved_field, is_solved, time):
     f.write("-----------------------------------------\n")
     f.close()
 
+
+def save_field(field, final=False):
+    if final:
+        f = open("save.txt", "w")
+    else:
+        f = open("source.txt", "w")
+    for row in field:
+        f.write("".join(map(str, row)) + "\n")
+    f.close()
+
+
+def read_field(final=False):
+    if (os.path.isfile("save.txt") and final) or (os.path.isfile("source.txt") and not final):
+        if final:
+            f = open("save.txt")
+        else:
+            f = open("source.txt")
+        s = f.read().split("\n")[:-1]
+
+        if len(s) != 9:
+            f.close()
+            field = [[0] * 9 for _ in range(9)]
+            save_field(field, final)
+            return field
+
+        field = []
+        for row in s:
+            field.append([])
+            for i in row:
+                field[-1].append(int(i))
+        f.close()
+    else:
+        field = [[0] * 9 for _ in range(9)]
+        save_field(field, final)
+
+    return field

@@ -1,33 +1,16 @@
-import time
-from solver import solve, deep_copy
-from log import save_logs
-
-field1 = [[3, 2, 0, 4, 5, 0, 0, 0, 0], [5, 8, 9, 7, 6, 0, 2, 4, 0], [6, 1, 0, 8, 2, 9, 5, 3, 0],
-          [4, 0, 1, 9, 3, 8, 0, 2, 0], [8, 7, 5, 6, 0, 0, 3, 9, 4], [9, 0, 0, 5, 4, 7, 6, 0, 8],
-          [0, 9, 6, 0, 8, 5, 4, 7, 2], [0, 5, 8, 2, 0, 4, 1, 0, 3], [0, 4, 3, 0, 7, 6, 0, 5, 9]]
-
-field2 = [[3, 0, 7, 4, 0, 1, 0, 0, 0], [5, 8, 0, 0, 6, 0, 2, 0, 0], [0, 0, 0, 0, 2, 0, 5, 3, 7],
-          [0, 0, 0, 0, 3, 0, 0, 2, 5], [0, 7, 0, 0, 0, 0, 0, 0, 4], [9, 0, 0, 5, 0, 7, 0, 1, 0],
-          [0, 0, 0, 3, 0, 5, 0, 7, 0], [0, 0, 8, 0, 9, 4, 0, 0, 3], [2, 4, 0, 0, 0, 0, 8, 0, 0]]
-
-field3 = [[0, 0, 0, 8, 0, 1, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 4, 3], [5, 0, 0, 0, 0, 0, 0, 0, 0],
-          [0, 0, 0, 0, 7, 0, 8, 0, 0], [0, 0, 0, 0, 0, 0, 1, 0, 0], [0, 2, 0, 0, 3, 0, 0, 0, 0],
-          [6, 0, 0, 0, 0, 0, 0, 7, 5], [0, 0, 3, 4, 0, 0, 0, 0, 0], [0, 0, 0, 2, 0, 0, 6, 0, 0]]
-
-field4 = [[1, 2, 3, 4, 5, 6, 7, 8, 0], [1, 2, 3, 4, 5, 6, 7, 8, 9], [5, 0, 0, 0, 0, 0, 0, 0, 0],
-          [0, 0, 0, 0, 7, 0, 8, 0, 0], [0, 0, 0, 0, 0, 0, 1, 0, 0], [0, 2, 0, 0, 3, 0, 0, 0, 0],
-          [6, 0, 0, 0, 0, 0, 0, 7, 5], [0, 0, 3, 4, 0, 0, 0, 0, 0], [0, 0, 0, 2, 0, 0, 6, 0, 0]]
-
-fields = [field1, field2, field3, field4]
+import streamlit as st
+from app import App
+from pages import create_sudoku, solve_sudoku
 
 
-for field in fields:
-    start = time.time()
-    for i in field:
-        print(i)
-    print()
-    solved_field, is_solved = solve(deep_copy(field))
-    save_logs(field, solved_field, is_solved, time.time() - start)
-    print("time: ", time.time() - start)
+def main():
+    app = App()
+    st.markdown("# Судоку")
 
-    print("-------------------------------------")
+    app.add_page("Решение Судоку", solve_sudoku)
+    app.add_page("Создание Судоку", create_sudoku)
+
+    app.run()
+
+
+main()
