@@ -1,4 +1,4 @@
-def check_field(field: list[list]) -> bool:
+def check_field(field):
     columns = [[0] * 9 for _ in range(9)]
     for i in range(9):
         for j in range(9):
@@ -25,7 +25,7 @@ def check_field(field: list[list]) -> bool:
     return True
 
 
-def deep_copy(field: list[list]) -> list[list]:  # производит глубокое копирование поля
+def deep_copy(field):  # производит глубокое копирование поля
     # эта функция в данном случае гораздо быстрее, чем deepcopy из модуля copy
     return [field[i].copy() for i in range(9)]
 
@@ -44,7 +44,7 @@ def get_options(x, y, field):  # возвращает возможные зна�
     return possible
 
 
-def solve_logically(field: list[list]) -> tuple[list, bool]:  # заполняет максимальное количество клеток, используя логику
+def solve_logically(field):  # заполняет максимальное количество клеток, используя логику
     field = deep_copy(field)
     change = True
     while change:
@@ -61,7 +61,7 @@ def solve_logically(field: list[list]) -> tuple[list, bool]:  # заполняе
     return field, True
 
 
-def solve(field: list[list]) -> tuple[list, bool]:  # решает рекурсивно
+def solve(field):  # решает рекурсивно
     field, res = solve_logically(field)
     if not res:
         return field, False
