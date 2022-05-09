@@ -1,6 +1,3 @@
-from time import time
-
-
 def check_field(field: list[list]) -> bool:
     columns = [[0] * 9 for _ in range(9)]
     for i in range(9):
