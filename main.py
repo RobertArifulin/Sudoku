@@ -1,6 +1,6 @@
-import copy
-from checker import check_field, check_move
-from solver import solve_logicaly
+import time
+from solver import solve, deep_copy
+from log import save_logs
 
 field1 = [[3, 2, 0, 4, 5, 0, 0, 0, 0], [5, 8, 9, 7, 6, 0, 2, 4, 0], [6, 1, 0, 8, 2, 9, 5, 3, 0],
           [4, 0, 1, 9, 3, 8, 0, 2, 0], [8, 7, 5, 6, 0, 0, 3, 9, 4], [9, 0, 0, 5, 4, 7, 6, 0, 8],
@@ -14,10 +14,20 @@ field3 = [[0, 0, 0, 8, 0, 1, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 4, 3], [5, 0, 0, 0,
           [0, 0, 0, 0, 7, 0, 8, 0, 0], [0, 0, 0, 0, 0, 0, 1, 0, 0], [0, 2, 0, 0, 3, 0, 0, 0, 0],
           [6, 0, 0, 0, 0, 0, 0, 7, 5], [0, 0, 3, 4, 0, 0, 0, 0, 0], [0, 0, 0, 2, 0, 0, 6, 0, 0]]
 
-for i in field3:
-    print(i)
+field4 = [[1, 2, 3, 4, 5, 6, 7, 8, 0], [1, 2, 3, 4, 5, 6, 7, 8, 9], [5, 0, 0, 0, 0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 7, 0, 8, 0, 0], [0, 0, 0, 0, 0, 0, 1, 0, 0], [0, 2, 0, 0, 3, 0, 0, 0, 0],
+          [6, 0, 0, 0, 0, 0, 0, 7, 5], [0, 0, 3, 4, 0, 0, 0, 0, 0], [0, 0, 0, 2, 0, 0, 6, 0, 0]]
 
-print("-------------------------------------")
+fields = [field1, field2, field3, field4]
 
-for i in solve(copy.deepcopy(field3))[0]:
-    print(i)
+
+for field in fields:
+    start = time.time()
+    for i in field:
+        print(i)
+    print()
+    solved_field, is_solved = solve(deep_copy(field))
+    save_logs(field, solved_field, is_solved, time.time() - start)
+    print("time: ", time.time() - start)
+
+    print("-------------------------------------")
