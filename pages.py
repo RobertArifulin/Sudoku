@@ -6,7 +6,7 @@ import time
 
 def create_sudoku():
     st.markdown('## Создание Судоку')
-    st.write('Введите условие (0 - пустая клетка)')
+    st.write('Введите условие')
 
     field = read_field()
 
@@ -31,7 +31,7 @@ def create_sudoku():
     for i in range(9):
         with columns[i]:
             for j in range(9):
-                field[j][i] = st.selectbox("", [_ for _ in range(10)], key=f"{i}{j}")
+                field[j][i] = st.selectbox("", [_ for _ in range(10)], key=f"{i}{j}", format_func=lambda x: x if x != 0 else "")
 
     save_field(field)
 
@@ -78,5 +78,18 @@ def solve_sudoku():
             st.download_button("Скачать Логи", data=f, file_name="logs.txt", mime="txt")
 
 
+def examples():
+    st.markdown('## Примеры решенных cудоку')
+    with open("examples.txt", encoding="utf-8") as f:
+        text = f.read().split("-----------------------------------------")
+        st.markdown("#### Первый пример - это простое судоку, которое не сложно решить самому.")
+        st.text(text[0])
+        st.write("#### Второй пример - это сложное судоку, которое трудно, но возможно решить самомоу. ")
+        st.text(text[1])
+        st.write("#### Третий пример - это судоку, состоящие только из 17 подсказок.\nДоказано, что задачи с меньшим количеством подсказок нельзя решить однозначно.")
+        st.text(text[2])
+        st.write("#### Четвертый пример - это пример судоку, которое невозможно решить.")
+        st.text(text[3])
+        st.write("#### Все примеры были взяты из логов. Если вы создадите такие-же задачи, программ выведет те-же ответы.")
 
 
