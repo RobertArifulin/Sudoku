@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9d0ecb80-11e0-4fa2-a3c7-01e8fa6fd602" name="Changes" comment="with comment">
+    <list default="true" id="9d0ecb80-11e0-4fa2-a3c7-01e8fa6fd602" name="Changes" comment="comment without inner &quot;list[list]&quot;">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/solver.py" beforeDir="false" afterPath="$PROJECT_DIR$/solver.py" afterDir="false" />
     </list>
@@ -252,7 +252,14 @@
       <option name="project" value="LOCAL" />
       <updated>1652188267461</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="comment without inner &quot;list[list]&quot;">
+      <created>1652188360326</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1652188360326</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -277,7 +284,8 @@
     <MESSAGE value="examples" />
     <MESSAGE value="test 3" />
     <MESSAGE value="with comment" />
-    <option name="LAST_COMMIT_MESSAGE" value="with comment" />
+    <MESSAGE value="comment without inner &quot;list[list]&quot;" />
+    <option name="LAST_COMMIT_MESSAGE" value="comment without inner &quot;list[list]&quot;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
