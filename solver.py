@@ -2,7 +2,7 @@ import time
 from log import save_logs
 
 
-def check_field(field: list[list]) -> bool:
+def check_field(field) -> bool:
     columns = [[0] * 9 for _ in range(9)]  # список столбцов
     for i in range(9):
         for j in range(9):
