@@ -2,7 +2,7 @@ import time
 from log import save_logs
 
 
-def check_field(field: list[list]) -> bool:
+def check_field(field: list) -> bool:
     columns = [[0] * 9 for _ in range(9)]  # список столбцов
     for i in range(9):
         for j in range(9):
@@ -29,12 +29,12 @@ def check_field(field: list[list]) -> bool:
     return True
 
 
-def deep_copy(field: list[list]) -> list[list]:  # производит глубокое копирование поля
+def deep_copy(field: list) -> list[list]:  # производит глубокое копирование поля
     # эта функция в данном случае гораздо быстрее, чем deepcopy из модуля copy
     return [field[i].copy() for i in range(9)]
 
 
-def get_options(x: int, y: int, field: list[list]) -> set:  # возвращает возможные значения в заданной клетке
+def get_options(x: int, y: int, field: list) -> set:  # возвращает возможные значения в заданной клетке
     possible = {1, 2, 3, 4, 5, 6, 7, 8, 9}
     for i in field[y]:  # строка
         possible.discard(i)
@@ -48,7 +48,7 @@ def get_options(x: int, y: int, field: list[list]) -> set:  # возвращае
     return possible
 
 
-def solve_logically(field: list[list]) -> tuple[list, bool]:  # заполняет максимальное количество клеток, используя логику
+def solve_logically(field: list) -> tuple[list, bool]:  # заполняет максимальное количество клеток, используя логику
     field = deep_copy(field)
     change = True
     while change:  # пока что-то меняется
