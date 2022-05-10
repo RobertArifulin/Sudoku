@@ -52,7 +52,7 @@ def solve_sudoku():
     for row in field:
         empty_count += row.count(0)
     if empty_count > 64:
-        st.warning("Некореткное условие")
+        st.warning("Некорректное условие")
         correct = False
     else:
         st.warning("Условие корректно")
